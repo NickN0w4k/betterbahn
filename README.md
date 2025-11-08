@@ -1,8 +1,6 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
 ## About This Branch
 
-This is a feature branch to test the possibilities of using BetterBahn as a statically generated website with PWA (Progressive Web App) capabilities.
+This feature branch is designed to explore the potential of using BetterBahn as a statically generated website with Progressive Web App (PWA) capabilities and client-side data fetching. The application utilizes the [v6.db.transport.rest API](https://v6.db.transport.rest/api.html) to retrieve data on the client side.
 
 ## Getting Started
 

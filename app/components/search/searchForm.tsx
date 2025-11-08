@@ -1,29 +1,64 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import StationInput from "./StationInput";
-import { Station } from "@/lib/hooks/useStationSearch";
+import type { Station } from "@/lib/types";
 
 export default function SearchForm() {
+	const router = useRouter();
 	const [origin, setOrigin] = useState<Station | null>(null);
 	const [destination, setDestination] = useState<Station | null>(null);
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
+		if (!origin || !destination) {
+			alert("Bitte wähle Start- und Zielbahnhof aus");
+			return;
+		}
+
 		const formData = new FormData(e.currentTarget);
 
-		const data = {
-			origin,
-			destination,
-			dateTime: formData.get("dateTime") as string,
-			age: formData.get("age") ? parseInt(formData.get("age") as string) : null,
-			hasDTicket: formData.get("hasDTicket") === "on",
-			trainClass: formData.get("trainClass") as string,
-			bahncard: formData.get("bahncard") as string,
-		};
+		// Build URL search params for the API call
+		const params = new URLSearchParams();
 
-		console.log("Suche Verbindung:", data);
+		// Required: from and to station IDs
+		params.append("from", origin.id);
+		params.append("to", destination.id);
+
+		// Date/Time - if provided, use departure, otherwise use current time
+		const dateTime = formData.get("dateTime") as string;
+		if (dateTime) {
+			params.append("departure", dateTime);
+		}
+
+		// Optional parameters
+		const age = formData.get("age") as string;
+		if (age) {
+			params.append("age", age);
+		}
+
+		const hasDTicket = formData.get("hasDTicket") === "on";
+		if (hasDTicket) {
+			params.append("deutschlandTicketDiscount", "true");
+		}
+
+		const trainClass = formData.get("trainClass") as string;
+		if (trainClass === "1") {
+			params.append("firstClass", "true");
+		}
+
+		const bahncard = formData.get("bahncard") as string;
+		if (bahncard !== "none") {
+			params.append("loyaltyCard", `bahncard${bahncard}`);
+		}
+
+		// Always request tickets info
+		params.append("tickets", "true");
+
+		// Navigate to results page with search params
+		router.push(`/results?${params.toString()}`);
 	};
 
 	return (

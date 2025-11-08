@@ -2,23 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useDebounce } from "./useDebounce";
-
-export interface Station {
-	type: string;
-	id: string;
-	name: string;
-	location?: {
-		type: string;
-		latitude: number;
-		longitude: number;
-	};
-}
-
-interface StationSearchResult {
-	stations: Station[];
-	loading: boolean;
-	error: string | null;
-}
+import type { Station, StationSearchResult } from "@/lib/types";
 
 export function useStationSearch(query: string): StationSearchResult {
 	const [stations, setStations] = useState<Station[]>([]);

@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { useStationSearch, Station } from "@/lib/hooks/useStationSearch";
+import { useStationSearch } from "@/lib/hooks/useStationSearch";
+import type { Station } from "@/lib/types";
 
 interface StationInputProps {
 	placeholder: string;
