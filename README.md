@@ -26,7 +26,7 @@ This change brings several benefits:
 - Optimize search logic and performance
 - Store recurring traveler data (e.g., name, BahnCard) using cookies
 - Add advanced options like arrival time, time window, or transport type filters
-- Improve station search by caching results to reduce unnecessary API calls
+- Improve station search by using a different approach such as db-hafas-stations or ZHV Haltestellenregister to reduce unnecessary API calls
 
 ### Split Ticketing
 
