@@ -6,7 +6,7 @@ export default function ResultsPage() {
 	return (
 		<main className="flex min-h-screen flex-col items-center p-8">
 			{/* Back to search link */}
-			<div className="w-full max-w-2xl mb-4">
+			<div className="w-full  mb-4">
 				<Link href="/" className="text-primary font-mono hover:underline">
 					← Neue Suche
 				</Link>
