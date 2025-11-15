@@ -1,9 +1,10 @@
 import SearchForm from "@/app/components/search/searchForm";
+import Hero from "@/app/components/layout/heroImage";
 export default function Home() {
 	return (
-		<main className="flex h-screen flex-col items-center justify-center">
+		<main>
+			<Hero />
 			<SearchForm />
-			
 		</main>
 	);
 }

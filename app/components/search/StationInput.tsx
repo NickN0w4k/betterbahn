@@ -58,12 +58,20 @@ export default function StationInput({
 				onChange={handleInputChange}
 				onFocus={() => setShowDropdown(true)}
 				placeholder={placeholder}
-				className="w-full border-2 border-gray-800 rounded-xl p-4 text-lg font-mono focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary"
+				aria-label={placeholder}
+				aria-autocomplete="list"
+				aria-expanded={showDropdown}
+				role="combobox"
+				className="w-full border-2 border-gray-300 rounded-3xl p-4 text-base font-mono focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary hover:border-gray-400 transition-colors"
 			/>
 
 			{/* Dropdown */}
 			{showDropdown && (inputValue.trim().length >= 2 || loading) && (
-				<div className="absolute z-10 w-full mt-2 bg-white border-2 border-gray-800 rounded-xl shadow-lg max-h-60 overflow-y-auto">
+				<div
+					className="absolute z-10 w-full mt-2 bg-white border-2 border-gray-300 rounded-3xl shadow-lg max-h-60 overflow-y-auto"
+					role="listbox"
+					aria-label="Bahnhof-Suchergebnisse"
+				>
 					{loading && (
 						<div className="p-4 text-center text-gray-600 font-mono">
 							Suche...
@@ -71,7 +79,10 @@ export default function StationInput({
 					)}
 
 					{error && (
-						<div className="p-4 text-center text-red-600 font-mono">
+						<div
+							className="p-4 text-center text-red-600 font-mono"
+							role="alert"
+						>
 							{error}
 						</div>
 					)}
@@ -92,7 +103,9 @@ export default function StationInput({
 								key={station.id}
 								type="button"
 								onClick={() => handleStationSelect(station)}
-								className="w-full text-left p-4 hover:bg-primary hover:text-white transition-colors font-mono border-b border-gray-200 last:border-b-0"
+								role="option"
+								aria-selected={selectedStation?.id === station.id}
+								className="w-full text-left p-4 hover:bg-primary hover:text-white transition-colors font-mono border-b border-gray-200 last:border-b-0 focus:outline-none focus:bg-primary focus:text-white"
 							>
 								{station.name}
 							</button>
